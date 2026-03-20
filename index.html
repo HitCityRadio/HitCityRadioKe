@@ -675,6 +675,289 @@
             color: #888;
         }
 
+        /* Vote and Search Styles */
+        .feed-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(230, 57, 70, 0.1);
+        }
+
+        .vote-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .vote-btn {
+            padding: 5px 10px;
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 5px;
+            color: #b0b0b0;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .vote-btn:hover {
+            background: rgba(230, 57, 70, 0.2);
+            color: #E63946;
+        }
+
+        .vote-btn.active {
+            background: #E63946;
+            color: #ffffff;
+            border-color: #E63946;
+        }
+
+        .vote-count {
+            font-size: 0.75rem;
+            color: #E63946;
+            font-weight: 600;
+        }
+
+        .search-container {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #E63946;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .search-input::placeholder {
+            color: #666;
+        }
+
+        /* Admin Panel Styles */
+        .admin-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .admin-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #E63946, #ff6b7a);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .admin-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: rgba(20, 20, 20, 0.95);
+            border-left: 2px solid #E63946;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-panel.open {
+            right: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .admin-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #E63946;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-admin {
+            background: none;
+            border: none;
+            color: #E63946;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-admin:hover {
+            color: #ff6b7a;
+        }
+
+        .admin-section {
+            margin-bottom: 25px;
+        }
+
+        .admin-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #E63946;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .pending-submission {
+            background: rgba(42, 42, 42, 0.6);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .pending-submission:hover {
+            border-color: rgba(230, 57, 70, 0.6);
+            background: rgba(42, 42, 42, 0.9);
+        }
+
+        .pending-name {
+            font-weight: 600;
+            color: #E63946;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .pending-link {
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            word-break: break-all;
+            margin-bottom: 8px;
+        }
+
+        .pending-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .approve-btn, .reject-btn {
+            flex: 1;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .approve-btn {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .approve-btn:hover {
+            background: rgba(76, 175, 80, 0.5);
+            color: #ffffff;
+        }
+
+        .reject-btn {
+            background: rgba(230, 57, 70, 0.3);
+            color: #E63946;
+            border: 1px solid rgba(230, 57, 70, 0.5);
+        }
+
+        .reject-btn:hover {
+            background: rgba(230, 57, 70, 0.5);
+            color: #ffffff;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: rgba(42, 42, 42, 0.6);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #E63946;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .admin-overlay.open {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .admin-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
         .footer {
             text-align: center;
             margin-top: 40px;
@@ -793,10 +1076,54 @@
 
             <div>
                 <h3 class="community-feed-title">📺 Community Feed</h3>
+                <div class="search-container">
+                    <input type="text" id="feedSearch" class="search-input" placeholder="Search by listener name or link...">
+                </div>
                 <div id="communityFeed" class="community-feed">
                     <div class="empty-feed">No submissions yet. Be the first to share!</div>
                 </div>
             </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2 class="admin-title">Admin Panel</h2>
+                <button class="close-admin" id="closeAdmin">&times;</button>
+            </div>
+            
+            <div class="admin-section">
+                <h3 class="admin-section-title">📊 Stats</h3>
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalSubmissions">0</div>
+                        <div class="stat-label">Total Submissions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="pendingCount">0</div>
+                        <div class="stat-label">Pending Approval</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="approvedCount">0</div>
+                        <div class="stat-label">Approved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="rejectedCount">0</div>
+                        <div class="stat-label">Rejected</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <h3 class="admin-section-title">⏳ Pending Submissions</h3>
+                <div id="pendingSubmissions"></div>
+            </div>
+        </div>
+
+        <!-- Admin Toggle Button -->
+        <div class="admin-toggle">
+            <button class="admin-btn" id="adminToggle">Admin Panel</button>
         </div>
 
         <div class="footer">
@@ -943,8 +1270,12 @@
             }, 3000);
         }
 
-        // Community Submissions
+        // Enhanced Community Submissions with Voting and Admin
         let communitySubmissions = [];
+        let pendingSubmissions = [];
+        let approvedSubmissions = [];
+        let rejectedSubmissions = [];
+        let filteredSubmissions = [];
 
         function isValidMediaLink(url) {
             try {
@@ -972,23 +1303,30 @@
                 name: name,
                 link: link,
                 type: getMediaType(link),
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                upvotes: 0,
+                downvotes: 0,
+                status: 'pending',
+                userVote: null
             };
             communitySubmissions.unshift(submission);
-            updateCommunityFeed();
+            pendingSubmissions.unshift(submission);
+            updateAdminPanel();
         }
 
-        function updateCommunityFeed() {
+        function updateCommunityFeed(submissionsToShow = null) {
             const feed = document.getElementById('communityFeed');
+            const toShow = submissionsToShow || approvedSubmissions;
             
-            if (communitySubmissions.length === 0) {
+            if (toShow.length === 0) {
                 feed.innerHTML = '<div class="empty-feed">No submissions yet. Be the first to share!</div>';
                 return;
             }
             
             feed.innerHTML = '';
-            communitySubmissions.forEach(submission => {
+            toShow.forEach(submission => {
                 const icon = submission.type === 'youtube' ? '▶️' : '🎵';
+                const voteCount = submission.upvotes - submission.downvotes;
                 const card = document.createElement('div');
                 card.className = 'feed-card';
                 card.innerHTML = `
@@ -1000,9 +1338,115 @@
                         <a href="${submission.link}" target="_blank" rel="noopener noreferrer">${submission.link}</a>
                     </div>
                     <div class="feed-card-time">${submission.time}</div>
+                    <div class="feed-card-footer">
+                        <div class="vote-buttons">
+                            <button class="vote-btn upvote-btn ${submission.userVote === 'up' ? 'active' : ''}" data-id="${submission.id}" onclick="handleVote(${submission.id}, 'up')">👍 ${submission.upvotes}</button>
+                            <button class="vote-btn downvote-btn ${submission.userVote === 'down' ? 'active' : ''}" data-id="${submission.id}" onclick="handleVote(${submission.id}, 'down')">👎 ${submission.downvotes}</button>
+                        </div>
+                        <div class="vote-count">${voteCount > 0 ? '+' : ''}${voteCount}</div>
+                    </div>
                 `;
                 feed.appendChild(card);
             });
+        }
+
+        function handleVote(submissionId, voteType) {
+            const submission = approvedSubmissions.find(s => s.id === submissionId);
+            if (!submission) return;
+
+            if (submission.userVote === voteType) {
+                if (voteType === 'up') submission.upvotes--;
+                else submission.downvotes--;
+                submission.userVote = null;
+            } else {
+                if (submission.userVote === 'up') submission.upvotes--;
+                else if (submission.userVote === 'down') submission.downvotes--;
+                
+                if (voteType === 'up') submission.upvotes++;
+                else submission.downvotes++;
+                submission.userVote = voteType;
+            }
+            
+            updateCommunityFeed();
+        }
+
+        function filterFeed(searchTerm) {
+            if (!searchTerm.trim()) {
+                updateCommunityFeed();
+                return;
+            }
+            
+            const term = searchTerm.toLowerCase();
+            filteredSubmissions = approvedSubmissions.filter(s => 
+                s.name.toLowerCase().includes(term) || 
+                s.link.toLowerCase().includes(term)
+            );
+            updateCommunityFeed(filteredSubmissions);
+        }
+
+        function approveSubmission(submissionId) {
+            const index = pendingSubmissions.findIndex(s => s.id === submissionId);
+            if (index !== -1) {
+                const submission = pendingSubmissions[index];
+                submission.status = 'approved';
+                approvedSubmissions.unshift(submission);
+                pendingSubmissions.splice(index, 1);
+                updateAdminPanel();
+                updateCommunityFeed();
+            }
+        }
+
+        function rejectSubmission(submissionId) {
+            const index = pendingSubmissions.findIndex(s => s.id === submissionId);
+            if (index !== -1) {
+                const submission = pendingSubmissions[index];
+                submission.status = 'rejected';
+                rejectedSubmissions.unshift(submission);
+                pendingSubmissions.splice(index, 1);
+                updateAdminPanel();
+            }
+        }
+
+        function updateAdminPanel() {
+            document.getElementById('totalSubmissions').textContent = communitySubmissions.length;
+            document.getElementById('pendingCount').textContent = pendingSubmissions.length;
+            document.getElementById('approvedCount').textContent = approvedSubmissions.length;
+            document.getElementById('rejectedCount').textContent = rejectedSubmissions.length;
+            
+            const pendingDiv = document.getElementById('pendingSubmissions');
+            if (pendingSubmissions.length === 0) {
+                pendingDiv.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">No pending submissions</div>';
+                return;
+            }
+            
+            pendingDiv.innerHTML = '';
+            pendingSubmissions.forEach(submission => {
+                const item = document.createElement('div');
+                item.className = 'pending-submission';
+                item.innerHTML = `
+                    <div class="pending-name">${submission.name}</div>
+                    <div class="pending-link">${submission.link}</div>
+                    <div class="pending-actions">
+                        <button class="approve-btn" onclick="approveSubmission(${submission.id})">Approve</button>
+                        <button class="reject-btn" onclick="rejectSubmission(${submission.id})">Reject</button>
+                    </div>
+                `;
+                pendingDiv.appendChild(item);
+            });
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            const overlay = document.getElementById('adminOverlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        function closeAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            const overlay = document.getElementById('adminOverlay');
+            panel.classList.remove('open');
+            overlay.classList.remove('open');
         }
 
         function handleSubmission(e) {
@@ -1060,6 +1504,19 @@
             });
             
             document.getElementById('submissionForm').addEventListener('submit', handleSubmission);
+            
+            // Search functionality
+            document.getElementById('feedSearch').addEventListener('input', function(e) {
+                filterFeed(e.target.value);
+            });
+            
+            // Admin panel
+            document.getElementById('adminToggle').addEventListener('click', toggleAdminPanel);
+            document.getElementById('closeAdmin').addEventListener('click', closeAdminPanel);
+            document.getElementById('adminOverlay').addEventListener('click', closeAdminPanel);
+            
+            // Initialize admin panel
+            updateAdminPanel();
         });
     </script>
 </body>
