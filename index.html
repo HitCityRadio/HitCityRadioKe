@@ -153,6 +153,75 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        /* Social Media Sharing Buttons */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            gap: 5px;
+        }
+
+        .share-btn-twitter {
+            background-color: #1DA1F2;
+            color: #ffffff;
+        }
+
+        .share-btn-twitter:hover {
+            background-color: #1a8cd8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+        }
+
+        .share-btn-facebook {
+            background-color: #1877F2;
+            color: #ffffff;
+        }
+
+        .share-btn-facebook:hover {
+            background-color: #165fd9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        }
+
+        .share-btn-whatsapp {
+            background-color: #25D366;
+            color: #ffffff;
+        }
+
+        .share-btn-whatsapp:hover {
+            background-color: #20ba5a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-btn-copy {
+            background-color: #E63946;
+            color: #ffffff;
+        }
+
+        .share-btn-copy:hover {
+            background-color: #d42d3a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
         }
 
         /* Radio Player Container */
@@ -372,6 +441,22 @@
                 <div id="nowPlaying" class="now-playing-container">
                     <div class="now-playing-label">Currently Playing</div>
                     <div id="songTitle" class="now-playing-title">Loading track info...</div>
+                    
+                    <!-- Social Media Sharing Buttons -->
+                    <div class="share-buttons">
+                        <button id="shareTwitter" class="share-btn share-btn-twitter" title="Share on X (Twitter)">
+                            <span>X</span> Share
+                        </button>
+                        <button id="shareFacebook" class="share-btn share-btn-facebook" title="Share on Facebook">
+                            <span>f</span> Share
+                        </button>
+                        <button id="shareWhatsapp" class="share-btn share-btn-whatsapp" title="Share on WhatsApp">
+                            <span>💬</span> Share
+                        </button>
+                        <button id="copyLink" class="share-btn share-btn-copy" title="Copy to Clipboard">
+                            <span>📋</span> Copy
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -444,6 +529,9 @@
             });
         }
 
+        // Store current song for sharing
+        let currentSongTitle = '';
+
         // Now Playing Update Logic
         async function updateNowPlaying() {
             const nowPlayingContainer = document.getElementById('nowPlaying');
@@ -461,6 +549,7 @@
                 
                 if (data && data.now_playing) {
                     songTitleElement.innerText = data.now_playing;
+                    currentSongTitle = data.now_playing;
                     nowPlayingContainer.style.display = 'block';
                 }
             } catch (error) {
@@ -468,6 +557,42 @@
                 // For demonstration, we'll show a placeholder if the user is live but the API is pending.
                 // In production, this would only show when data is successfully fetched.
             }
+        }
+
+        // Social Media Sharing Functions
+        function shareOnTwitter() {
+            if (!currentSongTitle) return;
+            const text = `Now listening to "${currentSongTitle}" on HIT CITY RADIO 🎙️ 🔥 Nairobi Underground • 24/7 Live`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+            window.open(url, '_blank', 'width=550,height=420');
+        }
+
+        function shareOnFacebook() {
+            if (!currentSongTitle) return;
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(`Now listening to "${currentSongTitle}" on HIT CITY RADIO 🎙️ Nairobi Underground`)}`;
+            window.open(url, '_blank', 'width=550,height=420');
+        }
+
+        function shareOnWhatsapp() {
+            if (!currentSongTitle) return;
+            const text = `Now listening to "${currentSongTitle}" on HIT CITY RADIO 🎙️ 🔥 Nairobi Underground • 24/7 Live ${window.location.href}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function copyToClipboard() {
+            if (!currentSongTitle) return;
+            const text = `Now listening to "${currentSongTitle}" on HIT CITY RADIO 🎙️ Nairobi Underground • 24/7 Live - ${window.location.href}`;
+            navigator.clipboard.writeText(text).then(() => {
+                const copyBtn = document.getElementById('copyLink');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<span>✓</span> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy to clipboard');
+            });
         }
 
         // Initialize on page load
@@ -482,6 +607,12 @@
             // Start Now Playing updates
             updateNowPlaying();
             setInterval(updateNowPlaying, 30000); // Update every 30 seconds
+
+            // Attach event listeners to share buttons
+            document.getElementById('shareTwitter').addEventListener('click', shareOnTwitter);
+            document.getElementById('shareFacebook').addEventListener('click', shareOnFacebook);
+            document.getElementById('shareWhatsapp').addEventListener('click', shareOnWhatsapp);
+            document.getElementById('copyLink').addEventListener('click', copyToClipboard);
         });
 
         // Fallback for Caster.fm widget initialization
