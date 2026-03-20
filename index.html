@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIT CITY RADIO - Nairobi Underground • 24/7 Live</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #080808 0%, #0a0a0a 50%, #0f0f0f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Live Pulse Animation */
+        @keyframes livePulse {
+            0% {
+                box-shadow: 0 0 10px #E63946, 0 0 20px #E63946;
+                opacity: 1;
+            }
+            50% {
+                box-shadow: 0 0 20px #E63946, 0 0 40px #E63946;
+                opacity: 0.8;
+            }
+            100% {
+                box-shadow: 0 0 10px #E63946, 0 0 20px #E63946;
+                opacity: 1;
+            }
+        }
+
+        .live-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .live-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #E63946;
+            border-radius: 50%;
+            animation: livePulse 2s infinite;
+        }
+
+        .live-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #E63946;
+            text-transform: uppercase;
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 60px;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(230, 57, 70, 0.5);
+            box-shadow: 0 8px 32px rgba(230, 57, 70, 0.15);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #E63946;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+
+        .subheader {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .status-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: #E63946;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* Radio Player Container */
+        .player-container {
+            margin: 30px 0;
+        }
+
+        .caster-widget {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* SEO Links (Hidden but Present) */
+        .seo-links {
+            display: none;
+            font-size: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .seo-links a {
+            color: #E63946;
+            text-decoration: none;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .bento-item {
+            background: rgba(230, 57, 70, 0.08);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .bento-item:hover::before {
+            left: 100%;
+        }
+
+        .bento-item:hover {
+            border-color: rgba(230, 57, 70, 0.6);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .bento-rank {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #E63946;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+        }
+
+        .bento-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .bento-artist {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            color: #b0b0b0;
+            font-weight: 400;
+        }
+
+        /* Top 10 Hits Section */
+        .hits-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #E63946;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(230, 57, 70, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .glass-card {
+                padding: 25px;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .bento-item {
+                padding: 15px;
+            }
+
+            .bento-rank {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .live-indicator {
+                top: 10px;
+            }
+
+            .container {
+                margin-top: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .subheader {
+                font-size: 0.8rem;
+            }
+
+            .glass-card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .bento-item {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .live-text {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            .container {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Live Indicator -->
+    <div class="live-indicator">
+        <div class="live-dot"></div>
+        <span class="live-text">● LIVE</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Glassmorphism Card with Radio Player -->
+        <div class="glass-card">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="main-title">HIT CITY RADIO</h1>
+                <p class="subheader">NAIROBI UNDERGROUND • 24/7 LIVE</p>
+                <p class="status-text">✦ NOW STREAMING ✦</p>
+            </div>
+
+            <!-- Radio Player Container -->
+            <div class="player-container">
+                <div class="caster-widget">
+                    <!-- Caster.fm Cloud Widget -->
+                    <div data-type="streamPlayer" 
+                    data-publicToken="7b28ffe0-7b66-4372-8f39-c8215fe4cc01" 
+                    data-theme="dark" 
+                    data-color="E63946" 
+                    data-rendered="false" class="cstrEmbed">
+                        <a href="https://www.caster.fm">Free Shoutcast Hosting</a> 
+                        <a href="https://www.caster.fm">Radio Stream Hosting</a> 
+                        <a href="https://www.caster.fm">Radio Server Hosting</a>
+                    </div>
+                    <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 10 Hits Section -->
+        <div class="hits-section">
+            <h2 class="section-title">🔥 TOP HITS 🔥</h2>
+            <div class="bento-grid" id="hitsGrid"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 HIT CITY RADIO | MORCAST | Nairobi Underground</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Top Hits Data
+        const topHits = [
+            {
+                rank: 1,
+                title: "Nairobi Nightlife",
+                artist: "DJ Mor"
+            },
+            {
+                rank: 2,
+                title: "Cloud Nine",
+                artist: "Skipper"
+            },
+            {
+                rank: 3,
+                title: "Rally Vibes",
+                artist: "WRC Mix"
+            },
+            {
+                rank: 4,
+                title: "Flood Zone",
+                artist: "City Beats"
+            }
+        ];
+
+        // Initialize Bento Grid
+        function initializeHitsGrid() {
+            const grid = document.getElementById('hitsGrid');
+            grid.innerHTML = '';
+
+            topHits.forEach(hit => {
+                const item = document.createElement('div');
+                item.className = 'bento-item';
+                item.innerHTML = `
+                    <div class="bento-rank">#${hit.rank}</div>
+                    <div class="bento-title">${hit.title}</div>
+                    <div class="bento-artist">${hit.artist}</div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHitsGrid();
+        });
+    </script>
+</body>
+</html>
