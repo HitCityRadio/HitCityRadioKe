@@ -345,16 +345,15 @@
             <div class="player-container">
                 <div class="caster-widget">
                     <!-- Caster.fm Cloud Widget -->
-                    <div data-type="streamPlayer" 
-                    data-publicToken="7b28ffe0-7b66-4372-8f39-c8215fe4cc01" 
-                    data-theme="dark" 
-                    data-color="E63946" 
-                    data-rendered="false" class="cstrEmbed">
-                        <a href="https://www.caster.fm" style="font-size: 10px; color: #333; text-decoration: none; margin-right: 10px;">Free Shoutcast Hosting</a> 
-                        <a href="https://www.caster.fm" style="font-size: 10px; color: #333; text-decoration: none; margin-right: 10px;">Radio Stream Hosting</a> 
-                        <a href="https://www.caster.fm" style="font-size: 10px; color: #333; text-decoration: none;">Radio Server Hosting</a>
+                    <script src="https://cdn.caster.fm/widget/caster-widget.js"></script>
+                    <div id="caster-widget" data-token="7b28ffe0-7b66-4372-8f39-c8215fe4cc01"></div>
+                    
+                    <!-- SEO Links (Hidden but Present) -->
+                    <div class="seo-links">
+                        <a href="https://www.caster.fm/free-shoutcast-hosting">Free Shoutcast Hosting</a>
+                        <a href="https://www.caster.fm/radio-stream-hosting">Radio Stream Hosting</a>
+                        <a href="https://www.caster.fm/radio-server-hosting">Radio Server Hosting</a>
                     </div>
-                    <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
                 </div>
             </div>
         </div>
@@ -417,6 +416,27 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeHitsGrid();
+            
+            // Initialize Caster.fm widget if available
+            if (window.CasterWidget) {
+                window.CasterWidget.init();
+            }
+        });
+
+        // Fallback for Caster.fm widget initialization
+        window.addEventListener('load', function() {
+            const widget = document.getElementById('caster-widget');
+            if (widget && !window.CasterWidget) {
+                // Attempt to load widget script if not already loaded
+                const script = document.createElement('script');
+                script.src = 'https://cdn.caster.fm/widget/caster-widget.js';
+                script.onload = function() {
+                    if (window.CasterWidget) {
+                        window.CasterWidget.init();
+                    }
+                };
+                document.head.appendChild(script);
+            }
         });
     </script>
 </body>
