@@ -139,17 +139,18 @@
             overflow: hidden;
         }
 
-        /* SEO Links (Hidden but Present) */
-        .seo-links {
-            display: none;
-            font-size: 1px;
-            height: 1px;
-            overflow: hidden;
+        /* SEO Links (Required for Caster.fm Validator) */
+        #caster-widget a {
+            font-size: 10px;
+            color: #333;
+            text-decoration: none;
+            margin: 0 5px;
+            opacity: 0.5;
         }
 
-        .seo-links a {
+        #caster-widget a:hover {
             color: #E63946;
-            text-decoration: none;
+            opacity: 1;
         }
 
         /* Bento Grid */
@@ -346,13 +347,10 @@
                 <div class="caster-widget">
                     <!-- Caster.fm Cloud Widget -->
                     <script src="https://cdn.caster.fm/widget/caster-widget.js"></script>
-                    <div id="caster-widget" data-token="7b28ffe0-7b66-4372-8f39-c8215fe4cc01"></div>
-                    
-                    <!-- SEO Links (Visible for Validator) -->
-                    <div style="margin-top: 20px; text-align: center;">
-                        <a href="https://www.caster.fm/free-shoutcast-hosting" style="font-size: 10px; color: #444; text-decoration: none; margin: 0 10px;">Free Shoutcast Hosting</a>
-                        <a href="https://www.caster.fm/radio-stream-hosting" style="font-size: 10px; color: #444; text-decoration: none; margin: 0 10px;">Radio Stream Hosting</a>
-                        <a href="https://www.caster.fm/radio-server-hosting" style="font-size: 10px; color: #444; text-decoration: none; margin: 0 10px;">Radio Server Hosting</a>
+                    <div id="caster-widget" data-token="7b28ffe0-7b66-4372-8f39-c8215fe4cc01">
+                        <a href="https://www.caster.fm/free-shoutcast-hosting">Free Shoutcast Hosting</a>
+                        <a href="https://www.caster.fm/radio-stream-hosting">Radio Stream Hosting</a>
+                        <a href="https://www.caster.fm/radio-server-hosting">Radio Server Hosting</a>
                     </div>
                 </div>
             </div>
